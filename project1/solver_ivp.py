@@ -1,6 +1,27 @@
 import numpy as np
 import matplotlib.pyplot as plt
 def solve_ivp(func, t_span, y0, method, t_eval, args):
+    """
+    func: function
+        The right-hand side of the differential equation.
+    t_span: array_like, [t0, t1], t0 < t1, from t0 to t1
+        The time span for the integration.
+    y0: array_like, shape (n,)
+        The initial condition on the state vector.
+    method: string
+        The method to use for the integration. One of 'RK2', 'euler', 'RK4'.
+    t_eval: float
+        The time step to use.
+    args: tuple
+        Extra arguments to pass to the function. need to have correct order.
+
+    Example for func with args:
+        def f(x,v,arg):
+            m=arg[0]
+            k=arg[1]
+            beta=arg[2]
+        return [v,-k*x/m-beta*v] 
+    """
     t=np.linspace(t_span[0],t_span[1],int((t_span[1]-t_span[0])/t_eval))
     def RK2(func, y0, t_eval,args):
         dt=t_eval
